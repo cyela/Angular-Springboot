@@ -1,15 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
- <div class="collapse navbar-collapse" id="navbarColor01">
-   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" routerLink="/register">Register</a>
-    </li>
-    <li class="nav-item ">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-   </ul>
- </div>
-
-
-
+<nav class="navbar navbar-expand-lg   navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" >
+        
+        
+        <div [ngSwitch]="loggedType">
+            <div   *ngSwitchCase="'home'" >
+                    <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/register"><h2>Register</h2></a> 
+                <a class="nav-item nav-link" routerLink="/login"><h2>Login</h2></a> 
+            </div>
+              </div>
+          <div   *ngSwitchCase="'customer'" >
+                <div class="navbar-nav">
+              <a class="nav-item nav-link" routerLink="/home"><h2>Home</h2></a> 
+            <a class="nav-item nav-link" routerLink="/address"><h2>Address</h2></a>
+            <a class="nav-item nav-link" routerLink="/viewcart"><h2>Cart</h2></a>
+            <div class="nav navbar-nav navbar-right">
+            <a class="nav-item nav-link " routerLink="/logout"><h2>Log out</h2></a> 
+            </div>
+        </div>
+          </div>
+          <div   *ngSwitchCase="'admin'" >
+                <div class="navbar-nav">
+              <a class="nav-item nav-link" routerLink="/home"><h2>Home</h2></a> 
+              <a class="nav-item nav-link" routerLink="/logout"><h2>Log out</h2></a> 
+            </div>
+            </div>
+        </div>
+    </div>
+    
+  
 </nav>

@@ -10,7 +10,8 @@ import {SESSION_STORAGE, StorageService} from 'angular-webstorage-service';
 })
 export class ApiService {
 private REG_API="http://localhost:8087/user/signup";
-private LOG_API="http://localhost:8087/user/verify";
+private LOGU_API="http://localhost:8087/user/verify";
+private LOGA_API="http://localhost:8087/admin/verify";
 private PRDLST_API="http://localhost:8087/user/getProducts";
 
 constructor(@Inject(SESSION_STORAGE) private storage:StorageService,private http:HttpClient) { 
@@ -24,9 +25,18 @@ register(user:User):Observable<any>{
                             {'Content-Type': 'application/json'} 
                           });
 }
-// validating credentials
-login(user:User):Observable<any>{
-  return this.http.post(this.LOG_API, 
+// validating user credentials
+userLogin(user:User):Observable<any>{
+  return this.http.post(this.LOGU_API, 
+    JSON.stringify(user),
+  { headers: 
+      {'Content-Type': 'application/json'} 
+    });
+}
+
+// validating admin credentials
+adminLogin(user:User):Observable<any>{
+  return this.http.post(this.LOGA_API, 
     JSON.stringify(user),
   { headers: 
       {'Content-Type': 'application/json'} 
@@ -44,15 +54,22 @@ public isAuthenticated():boolean{
   return this.getToken()!==null;
 }
 
-storeToken(token:string){
+storeToken(token:string,auth_type:string){
   this.storage.set("auth_token",token);
+  this.storage.set("auth_type",auth_type);
 }
+
+getAuthType():string{
+  return this.storage.get("auth_type");
+}
+
 
 getToken(){
   return this.storage.get("auth_token");
 }
 
 removeToken(){
+  this.storage.remove("auth_type");
   return this.storage.remove("auth_token");
 }
 

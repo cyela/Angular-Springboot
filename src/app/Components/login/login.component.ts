@@ -22,13 +22,24 @@ export class LoginComponent implements OnInit {
   }
 
   login():void{
-    this.apiService.login(this.model).
+    this.apiService.userLogin(this.model).
     subscribe(res=>{
       if(res.status=="200"){
-          this.apiService.storeToken(res.auth_TOKEN);
+          this.apiService.storeToken(res.auth_TOKEN,"customer");
           this.router.navigate(['/home']);
       }else{
-        this.router.navigate(['/login']);
+        this.apiService.adminLogin(this.model).
+        subscribe(res=>{
+            if(res.status=="200"){
+              this.apiService.storeToken(res.auth_TOKEN,"admin");
+              this.router.navigate(['/admin']);
+            }else{
+              this.router.navigate(['/login']);
+            }
+        },
+        err=>{
+          alert("An error has occured, Please try again !!!");
+        });
       }
     },
     err=>{
