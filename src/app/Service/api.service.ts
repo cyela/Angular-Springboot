@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../Model/product';
 import { User } from '../Model/user';
 import {SESSION_STORAGE, StorageService} from 'angular-webstorage-service';
+import { Address } from '../Model/address';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,13 @@ private REG_API="http://localhost:8087/user/signup";
 private LOGU_API="http://localhost:8087/user/verify";
 private LOGA_API="http://localhost:8087/admin/verify";
 private PRDLST_API="http://localhost:8087/user/getProducts";
+private ADD_CART_API="http://localhost:8087/user/addToCart?productId=";
+private VW_CART_API="http://localhost:8087/user/viewCart";
+private UP_CART_API="http://localhost:8087/user/updateCart";
+private DEL_CART_API="http://localhost:8087/user/delCart";
+private PLC_ORD_API="http://localhost:8087/user/placeOrder";
+private ADR_API="http://localhost:8087/user/addAddress";
+private GT_ADR_API="http://localhost:8087/user/getAddress"
 
 constructor(@Inject(SESSION_STORAGE) private storage:StorageService,private http:HttpClient) { 
 
@@ -50,6 +58,52 @@ getProducts(auth:string):Observable<any>{
           
 }
    
+// Add Products to the user Cart
+addCartItems(product:Product,auth:string):Observable<any>{
+  const myheader=new HttpHeaders().set('AUTH_TOKEN', auth);
+  return this.http.get<any>(this.ADD_CART_API+product.productid,{headers:myheader});
+}
+
+// View Cart Items for the logged User
+
+getCartItems(auth:string):Observable<any>{
+  const myheader=new HttpHeaders().set('AUTH_TOKEN', auth);
+  return this.http.get<any>(this.VW_CART_API,{headers:myheader});
+}
+
+// add items to cart for the logged User
+updateCart(auth:string,prodid:number,quant:number):Observable<any>{
+  const myheader=new HttpHeaders().set('AUTH_TOKEN', auth);
+  return this.http.get<any>(this.UP_CART_API+"?bufcartid="+prodid+"&quantity="+quant,{headers:myheader});
+}
+
+// delete cart Item from logged User's Cart item
+delCart(auth:string,bufdid:number):Observable<any>{
+  const myheader=new HttpHeaders().set('AUTH_TOKEN', auth);
+  return this.http.get<any>(this.DEL_CART_API+"?bufcartid="+bufdid,{headers:myheader});
+}
+
+// place the order of logged User
+place(auth:string):Observable<any>{
+const myheader=new HttpHeaders().set('AUTH_TOKEN', auth);
+  return this.http.get<any>(this.PLC_ORD_API,{headers:myheader});
+}
+
+// update Address of logged User
+upAddress(auth:string,adr:Address):Observable<any>{
+  const myheader=new HttpHeaders().set('AUTH_TOKEN', auth);
+  return this.http.post<any>(this.ADR_API,adr,{headers:myheader});
+}
+
+// fetch address of logged user
+getAddress(auth:string):Observable<any>{
+  const myheader=new HttpHeaders().set('AUTH_TOKEN',auth);
+  return this.http.post<any>(this.GT_ADR_API,null,{headers:myheader});
+}
+
+
+// Authentication Methods 
+
 public isAuthenticated():boolean{
   return this.getToken()!==null;
 }
@@ -60,7 +114,10 @@ storeToken(token:string,auth_type:string){
 }
 
 getAuthType():string{
-  return this.storage.get("auth_type");
+  if(this.storage.get("auth_type")!==null){
+    return this.storage.get("auth_type");
+  }
+ return null;
 }
 
 

@@ -12,6 +12,8 @@ import { RegisterComponent } from './Components/register/register.component';
 import { ProductComponent } from './Components/product/product.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AuthguardGuard } from './Service/authguard.guard';
+import { CartItemComponent } from './Components/cart-item/cart-item.component';
+import { AddressComponent } from './Components/address/address.component';
 const appRoutes:Routes=[
 {
   path:'login',
@@ -25,6 +27,16 @@ const appRoutes:Routes=[
   path:'home',
   component: HomeComponent,
   canActivate:[AuthguardGuard]
+},
+{
+  path:'home/cart',
+  component: CartItemComponent,
+  canActivate:[AuthguardGuard]
+},
+{
+  path:'home/address',
+  component: AddressComponent,
+  canActivate:[AuthguardGuard]
 }
 ];
 
@@ -35,7 +47,9 @@ const appRoutes:Routes=[
     LoginComponent,
     RegisterComponent,
     ProductComponent,
-    HomeComponent
+    HomeComponent,
+    CartItemComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,

@@ -11,12 +11,23 @@
               </div>
           <div   *ngSwitchCase="'customer'" >
                 <div class="navbar-nav">
-              <a class="nav-item nav-link" routerLink="/home"><h2>Home</h2></a> 
-            <a class="nav-item nav-link" routerLink="/address"><h2>Address</h2></a>
-            <a class="nav-item nav-link" routerLink="/viewcart"><h2>Cart</h2></a>
-            <div class="nav navbar-nav navbar-right">
-            <a class="nav-item nav-link " routerLink="/logout"><h2>Log out</h2></a> 
-            </div>
+              
+                    <div class="col-1">
+                            <a class="nav-item nav-link" routerLink="/home"><h2>Home</h2></a> 
+                           
+                    </div>
+                    <div class="offset-2 col-1">
+                            
+                            <a class="nav-item nav-link" routerLink="/home/address"><h2>Address</h2></a>
+                            
+                    </div>
+                    <div class="offset-2 col-1">
+                            
+                            <a class="nav-item nav-link" routerLink="/home/cart"><h2>Cart</h2></a>
+                    </div>
+                    <div class="offset-10 col-4" style="margin-right: 10px">
+                            <a class="nav-item nav-link" routerLink="/logout"><h2>Log out</h2></a> 
+                    </div>
         </div>
           </div>
           <div   *ngSwitchCase="'admin'" >

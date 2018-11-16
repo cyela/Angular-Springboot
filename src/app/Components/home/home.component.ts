@@ -25,6 +25,9 @@ export class HomeComponent implements OnInit {
       }
   }
 
-  
-
+  addToCart(e){
+    this.api.addCartItems(e,this.auth_token).subscribe(res=>{
+      console.log(res);
+    })
+  }
 }

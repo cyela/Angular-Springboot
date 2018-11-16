@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/app/Model/product';
+import { EventEmitter } from '@angular/core';
+
 
 
 @Component({
@@ -11,10 +13,16 @@ import { Product } from 'src/app/Model/product';
 export class ProductComponent implements OnInit {
   
   @Input() public product;
+
+  @Output() productAddToCart:EventEmitter<Product>=new EventEmitter<Product>();
   constructor(private http:HttpClient) { }
 
   ngOnInit() {
    
+  }
+
+  addToCart(){
+    this.productAddToCart.emit(this.product);
   }
 
 }

@@ -8,18 +8,23 @@ import { ApiService } from 'src/app/Service/api.service';
 })
 export class NavigationComponent implements OnInit {
   private loggedType:string;
-  constructor(private auth:ApiService) { }
-
-  ngOnInit() {
-    console.log(this.auth.getAuthType());
-    if(this.auth.getAuthType()=="customer"){
+  constructor(private auth:ApiService) {
+    if(this.auth.getAuthType()==null){
+      this.loggedType="home";
+  }else{
+      
+      if(this.auth.getAuthType()=="customer"){
         
         this.loggedType="customer";
     }else if(this.auth.getAuthType()=="admin"){
       this.loggedType="admin";
-    }else{
-      this.loggedType="home";
     }
+    }
+   }
+
+  ngOnInit() {
+     //console.log(this.auth.getAuthType());
+   
   }
 
 }

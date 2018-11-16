@@ -26,12 +26,19 @@
 
    
                 <div class="panel panel-primary">
-                  <div class="panel-heading"> <h2>{{product.productname}}</h2></div>
+                  <div class="panel-heading"> 
+                          <div class="row">
+                                  <div class="col-7"><h2>{{product.productname}}</h2> </div>
+                                  <div class="offset-3 col-2"><button class="btn btn-warning" style="text-align: right" (click)="addToCart()"><h4>Add to cart</h4></button></div>
+                          </div>
+                          
+                          
+                </div>
                   <div class="panel-body">
                           <h3> {{product.description}}</h3>
                           
                         <img src="data:image/png;base64,{{product.productimage}}" class="img-responsive" height="150px" width="200px" alt="Image"></div>
                   <div class="panel-footer"><h4>Buy it for {{product.price}} $</h4>
-                                <button class="btn btn-primary" ><h4>Add to cart</h4></button>
+                                
                   </div>
                 </div>

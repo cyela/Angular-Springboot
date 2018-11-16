@@ -14,9 +14,12 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
-
+    if(this.auth.isAuthenticated!=null){
     if(this.auth.isAuthenticated){
       this.router.navigate(["/home"]);
+    }
+  }else{
+      this.router.navigate(["/login"]);
     }
   }
 }
