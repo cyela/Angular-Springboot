@@ -14,6 +14,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { AuthguardGuard } from './Service/authguard.guard';
 import { CartItemComponent } from './Components/cart-item/cart-item.component';
 import { AddressComponent } from './Components/address/address.component';
+import { AdminComponent } from './Components/admin/admin.component';
 const appRoutes:Routes=[
 {
   path:'login',
@@ -49,7 +50,8 @@ const appRoutes:Routes=[
     ProductComponent,
     HomeComponent,
     CartItemComponent,
-    AddressComponent
+    AddressComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
