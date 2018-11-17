@@ -1,0 +1,10 @@
+<form class="form-horizontal " #f="ngForm" (ngSubmit)="f.form.valid && updateProd(desc,quan,price,prodname,image)">
+ 
+  <input type="text" placeholder="description"  name="desc" #desc ngModel  [(ngModel)]="product.description"  >
+  <input type="text" placeholder="quantity" name="quan" #quan ngModel  [(ngModel)]="product.quantity" >
+  <input type="text" placeholder="price" name="price" #price ngModel  [(ngModel)]="product.price"  >
+  <img src="data:image/png;base64,{{product.productimage}}"  style="width:250px;height: 200px;">
+  <input type="text" placeholder="Product Name" #prodname ngModel name="prodname"  [(ngModel)]="product.productname">
+  <input type="file" placeholder="Product Picture" #image accept="image/*" name="image" (change)="handleFileInput($event.target.files)">
+  <input type="submit" value="Add Product">
+</form>

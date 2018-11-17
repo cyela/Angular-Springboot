@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../Model/product';
 import { User } from '../Model/user';
@@ -20,7 +20,10 @@ private UP_CART_API="http://localhost:8087/user/updateCart";
 private DEL_CART_API="http://localhost:8087/user/delCart";
 private PLC_ORD_API="http://localhost:8087/user/placeOrder";
 private ADR_API="http://localhost:8087/user/addAddress";
-private GT_ADR_API="http://localhost:8087/user/getAddress"
+private GT_ADR_API="http://localhost:8087/user/getAddress";
+private ADD_PRD_API="http://localhost:8087/admin/addProduct";
+private DEL_PRD_API="http://localhost:8087/admin/delProduct";
+private UPD_PRD_API="http://localhost:8087/admin/updateProducts";
 
 constructor(@Inject(SESSION_STORAGE) private storage:StorageService,private http:HttpClient) { 
 
@@ -101,6 +104,46 @@ getAddress(auth:string):Observable<any>{
   return this.http.post<any>(this.GT_ADR_API,null,{headers:myheader});
 }
 
+
+// Add product for Logged AdminUser
+
+addProduct(auth:string,desc:string,
+  quan:string,price:string,prodname:string,image:File):Observable<any>{
+
+  const formData:FormData=new FormData();
+  formData.append("description",desc);
+  formData.append("price",price);
+  formData.append("productname",prodname);
+  formData.append("quantity",quan);
+  formData.append("file",image);
+
+  const myheader=new HttpHeaders().set('AUTH_TOKEN',auth);
+  return this.http.post<any>(this.ADD_PRD_API,formData,{headers:myheader});
+
+}
+
+// delete Product for Logged Admin User
+delProduct(auth:string,prodid:number){
+  const myheader=new HttpHeaders().set('AUTH_TOKEN',auth);
+  return this.http.get<any>(this.DEL_PRD_API+"?productid="+prodid,{headers:myheader})
+}
+
+// update Product for Logged Admin User
+updateProduct(auth:string,desc:string,
+  quan:string,price:string,prodname:string,image:File,productid:any):Observable<any>{
+
+  const formData:FormData=new FormData();
+  formData.append("description",desc);
+  formData.append("price",price);
+  formData.append("productname",prodname);
+  formData.append("quantity",quan);
+  formData.append("file",image);
+  formData.append("productid",productid);
+
+  const myheader=new HttpHeaders().set('AUTH_TOKEN',auth);
+  return this.http.post<any>(this.UPD_PRD_API,formData,{headers:myheader});
+
+}
 
 // Authentication Methods 
 

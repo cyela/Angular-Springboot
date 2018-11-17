@@ -32,8 +32,8 @@
           </div>
           <div   *ngSwitchCase="'admin'" >
                 <div class="navbar-nav">
-              <a class="nav-item nav-link" routerLink="/home"><h2>Home</h2></a> 
-              <a class="nav-item nav-link" routerLink="/logout"><h2>Log out</h2></a> 
+              <a class="nav-item nav-link" routerLink="/admin"><h2>Home</h2></a> 
+              <a class="nav-item nav-link" (click)="logout()"><h2>Log out</h2></a> 
             </div>
             </div>
         </div>

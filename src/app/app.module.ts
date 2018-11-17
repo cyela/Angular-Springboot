@@ -15,6 +15,7 @@ import { AuthguardGuard } from './Service/authguard.guard';
 import { CartItemComponent } from './Components/cart-item/cart-item.component';
 import { AddressComponent } from './Components/address/address.component';
 import { AdminComponent } from './Components/admin/admin.component';
+import { EditItemComponent } from './Components/edit-item/edit-item.component';
 const appRoutes:Routes=[
 {
   path:'login',
@@ -24,6 +25,11 @@ const appRoutes:Routes=[
   path:'register',
   component: RegisterComponent
 },
+{
+  path:'admin',
+  component: AdminComponent
+}
+,
 {
   path:'home',
   component: HomeComponent,
@@ -38,6 +44,11 @@ const appRoutes:Routes=[
   path:'home/address',
   component: AddressComponent,
   canActivate:[AuthguardGuard]
+},
+{
+  path:'admin/edit',
+  component: EditItemComponent,
+  canActivate:[AuthguardGuard]
 }
 ];
 
@@ -51,7 +62,8 @@ const appRoutes:Routes=[
     HomeComponent,
     CartItemComponent,
     AddressComponent,
-    AdminComponent
+    AdminComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,

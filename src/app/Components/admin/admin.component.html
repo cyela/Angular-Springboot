@@ -1,3 +1,45 @@
-<p>
-  admin works!
-</p>
+<div class="container">
+  <div class="row">
+    <form class="form-horizontal " #f="ngForm" (ngSubmit)="f.form.valid && addProd(desc,quan,price,prodname,image)">
+ 
+       <input type="text" placeholder="description"  name="desc" #desc ngModel>
+       <input type="text" placeholder="quantity" name="quan" #quan ngModel>
+       <input type="text" placeholder="price" name="price" #price ngModel >
+       <img [src]="imageUrl"  style="width:250px;height: 200px;">
+       <input type="text" placeholder="Product Name" #prodname ngModel name="prodname" >
+       <input type="file" placeholder="Product Picture" #image accept="image/*" name="image" (change)="handleFileInput($event.target.files)">
+       <input type="submit" value="Add Product">
+    </form>
+
+  </div>
+    <div  class="row"> 
+        <div *ngFor="let prod of products">   
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">
+                            {{prod.productname}}</h4>
+                        <p class="group inner list-group-item-text">
+                            {{prod.description}}</p>
+                            <img src="data:image/png;base64,{{prod.productimage}}" class="img-responsive" height="50px" width="20px" alt="Image">
+                            <input type="hidden" value={{prod.productid}} #prdid >
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    {{prod.productprice}}</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <button class="btn btn-primary" (click)="edit(prdid)" >Edit Items</button>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <button class="btn btn-primary" (click)="delProd(prdid)">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             
+          </div>
+       </div>
+    </div>
+          
