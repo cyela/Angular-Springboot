@@ -1,7 +1,7 @@
 ### ShoppingApp
 ### Angular with SpringBoot Web Services
 #### Its a E-Commerce Shopping Application built for both Admin and Customer operations. Application uses Springboot Web Services 
-#### for performing all the back end operations and Angular for providing the front end user interactions. For handling session #### management application uses JWT Tokens.  
+#### for performing all the back end operations and Angular for providing the front end user interactions. For handling session application uses JWT Tokens.  
 #### Following are the operations that can be performed by the Respective User
 * Admin
   * Adding products
