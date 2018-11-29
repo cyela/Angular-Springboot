@@ -30,15 +30,19 @@ export class CartItemComponent implements OnInit {
   }
   update(id,quantity){
     this.api.updateCart(this.auth,id.value,quantity.value).subscribe(res=>{
-      console.log(res);
+      this.cartlist=res.oblist;
+      this.cartlist.forEach(value=>{
+        this.totalSum= this.totalSum+(value.quantity*value.price);
+       });
     });
-  this.ngOnInit();
   }
   delete(id){
     this.api.delCart(this.auth,id.value).subscribe(res=>{
-      console.log(res);
+      this.cartlist=res.oblist;
+      this.cartlist.forEach(value=>{
+        this.totalSum= this.totalSum+(value.quantity*value.price);
+       });
     });
-    this.ngOnInit();
   }
 
   place(){

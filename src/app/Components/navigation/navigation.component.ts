@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class NavigationComponent implements OnInit {
   private loggedType:string;
   constructor(private auth:ApiService,private route:Router) {
+    
     if(this.auth.getAuthType()==null){
       this.loggedType="home";
   }else{
@@ -28,6 +29,7 @@ export class NavigationComponent implements OnInit {
    
   }
   logout(){
+    this.loggedType="home";
     this.auth.removeToken();
     this.route.navigate(['/login']);
   }

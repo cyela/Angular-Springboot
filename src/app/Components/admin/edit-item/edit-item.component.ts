@@ -22,6 +22,8 @@ export class EditItemComponent implements OnInit {
   fileToUpload:File=null;
   auth:string;
   prodid:string;
+  imageUrl:string="/assets/img/noimage.png";
+  
   constructor(private route:ActivatedRoute,private api:ApiService) {
     if(this.api.isAuthenticated){
       this.auth=this.api.getToken();
@@ -48,7 +50,7 @@ export class EditItemComponent implements OnInit {
     this.fileToUpload=file.item(0);
     var reader=new FileReader();
     reader.onload=(event:any)=>{
-    //  this.imageUrl=event.target.result;
+    this.imageUrl=event.target.result;
     }
     reader.readAsDataURL(this.fileToUpload);
   }

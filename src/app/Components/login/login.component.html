@@ -1,43 +1,22 @@
 <div class="container">
-    
-        <div>
-            <span ><h2>Login</h2></span>
-            <form class="form-horizontal " #f="ngForm"
-             (ngSubmit)="f.form.valid && login()" novalidate >
-                <div class="form-group">
-                        
-                        <div class="col">
-                              Email:  
-                              <input type="email" 
-                              name="email" 
-                              class="form-control" 
-                              [(ngModel)]="model.email" 
-                              #email="ngModel"
-                                [ngClass]="{'is-invalid':f.submitted && email.invalid}"
-                                required email/>
-                    <div *ngIf="f.submitted && email.invalid" class="invalid-input">
-                            <!-- individual validation erros -->
-                            <div *ngIf="email.errors?.required">Field is required</div>
-                            <div *ngIf="email.errors?.email">Field is not email</div>
-                        </div>
-                        </div>
+    <br>
+       <div class="row">
+            <div class="col-4">
+                    <div class="text-center">
+                            <img src="assets/img/login.jpg" class="rounded" alt="..." style="width:50%">
+                     </div>
+            </div>
+            <div class="col-8">
+                <form [formGroup]="loginForm" (ngSubmit)="login()" >
+                    <div class="form-group">
+                        <input class="form-control"  formControlName="email" placeholder="Enter your Email" style="width:50%">
                     </div>
                     <div class="form-group">
-                        
-                        <div class="col">
-                        Password:   <input type="text" name="password" class="form-control" [(ngModel)]="model.password"/>
-                                        
-                        </div>
+                        <input class="form-control" formControlName="password" placeholder="Enter your password" style="width:50%">
                     </div>
-                    <div>
-                        <div class="col ">
-                            <input type="submit"  value="Login" class="btn btn-primary" />
-                        </div>
-                    </div> 
-                
-            </form>
-        </div>
-    
-  
-    
-    </div>
+                    <input type="submit" class="btn btn-secondary align-right" value="Login">
+                    </form> 
+            </div>
+       </div>
+           
+<div>

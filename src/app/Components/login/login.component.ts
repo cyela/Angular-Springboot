@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/Model/user';
 import { ApiService } from 'src/app/Service/api.service';
 import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,31 +9,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model:User={
-    email:'',
-    username:'',
-    password:'',
-    usertype:'',
-    age:''
-  };
-  constructor(private apiService:ApiService,private router:Router) { }
+  
+  private loginForm:any;
+  
+  constructor(private apiService:ApiService,
+                private router:Router,
+                  private formBuilder:FormBuilder) { 
+    this.createForm();
+  }
 
   ngOnInit() {
   }
-
+  createForm() {
+    this.loginForm = this.formBuilder.group({
+      email:'',
+      password:''
+    });
+  }
   login():void{
-    this.apiService.userLogin(this.model).
+    this.apiService.userLogin(this.loginForm.value).
     subscribe(res=>{
-      console.log(res);
       if(res.status=="200"){
           this.apiService.storeToken(res.auth_TOKEN,"customer");
           this.router.navigate(['/home']);
       }
     },
     err=>{
-      this.apiService.adminLogin(this.model).
+      this.apiService.adminLogin(this.loginForm.value).
       subscribe(res=>{
-        console.log(res);
           if(res.status=="200"){
             this.apiService.storeToken(res.auth_TOKEN,"admin");
             this.router.navigate(['/admin']);

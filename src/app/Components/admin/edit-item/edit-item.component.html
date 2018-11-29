@@ -1,0 +1,36 @@
+
+<div class="container">
+  <br>
+<form class="form-horizontal " #f="ngForm" (ngSubmit)="f.form.valid && updateProd(desc,quan,price,prodname,image)" >
+    <div class="row">
+        <div class="col-6">
+                <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Product Name" #prodname ngModel name="prodname"  [(ngModel)]="product.productname" >
+                </div>
+                <div class="form-group">
+                        <textarea type="text" class="form-control" placeholder="description"  name="desc" #desc ngModel  [(ngModel)]="product.description"  rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                        <input type="text" class="form-control" placeholder="quantity" name="quan" #quan ngModel  [(ngModel)]="product.quantity">
+                </div>
+                <div class="form-group">
+                        <input type="text" class="form-control" placeholder="price" name="price" #price ngModel  [(ngModel)]="product.price" >
+                </div>
+                <div class="form-group">
+                        <input type="file" class="form-control" placeholder="Product Picture" #image accept="image/*" name="image" (change)="handleFileInput($event.target.files)">
+                </div>
+        </div>
+        <div class="col-3" >
+                <p><b>Original Image</b></p>
+                <img src="data:image/png;base64,{{product.productimage}}"  style="width:70%;height: 60%;">
+                
+        </div>
+        <div class="col-3" >
+            <p><b>New Image</b></p>
+            <img  [src]="imageUrl"  style="width:250px;height: 200px;">
+            
+    </div>
+    <input type="submit" class=" btn btn-secondary" value="Update Product">
+    </div>
+</form>
+</div>

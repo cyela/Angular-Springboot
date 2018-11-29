@@ -1,21 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import {StorageServiceModule} from 'angular-webstorage-service';
 import {Router, Routes, RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { NavigationComponent } from './Components/navigation/navigation.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { ProductComponent } from './Components/product/product.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AuthguardGuard } from './Service/authguard.guard';
-import { CartItemComponent } from './Components/cart-item/cart-item.component';
-import { AddressComponent } from './Components/address/address.component';
 import { AdminComponent } from './Components/admin/admin.component';
-import { EditItemComponent } from './Components/edit-item/edit-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductComponent } from './Components/home/product/product.component';
+import { CartItemComponent } from './Components/home/cart-item/cart-item.component';
+import { AddressComponent } from './Components/home/address/address.component';
+import { EditItemComponent } from './Components/admin/edit-item/edit-item.component';
+import { OrderItemComponent } from './Components/admin/order-item/order-item.component';
 const appRoutes:Routes=[
 {
   path:'login',
@@ -49,6 +52,11 @@ const appRoutes:Routes=[
   path:'admin/edit',
   component: EditItemComponent,
   canActivate:[AuthguardGuard]
+},
+{
+  path:'admin/order',
+  component: OrderItemComponent,
+  canActivate:[AuthguardGuard]
 }
 ];
 
@@ -63,7 +71,8 @@ const appRoutes:Routes=[
     CartItemComponent,
     AddressComponent,
     AdminComponent,
-    EditItemComponent
+    EditItemComponent,
+    OrderItemComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +80,11 @@ const appRoutes:Routes=[
     HttpClientModule,
     StorageServiceModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule.forRoot(),
+    NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

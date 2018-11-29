@@ -1,31 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/Model/user';
 import { ApiService } from 'src/app/Service/api.service';
-
-
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-model:User={
-  email:'',
-  username:'',
-  password:'',
-  usertype:'',
-  age:''
-};
-  constructor(private apiService:ApiService) { }
+  private registerForm:any;
+  constructor(private apiService:ApiService,
+                  private router:Router,
+                    private formBuilder:FormBuilder) {
+                        this.createForm();
+          }
 
   ngOnInit() {
   }
-
+  createForm() {
+    this.registerForm = this.formBuilder.group({
+      email:'',
+      password:'',
+      username:'',
+      age:'',
+      usertype:'customer'
+    });
+  }
   register():void{
     
-   this.apiService.register(this.model).
+   this.apiService.register(this.registerForm.value).
    subscribe(res=>{
-     console.log(res);
+    this.router.navigate(['/login']);
    },
    err=>{
      alert("An error has occured, Please try again !!!");

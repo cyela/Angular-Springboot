@@ -1,0 +1,51 @@
+<div class="container">
+<br>
+
+  <a routerLink="/home" class="btn btn-primary"><i class="fa fa-angle-left"></i> Continue Shopping</a><br>
+  <p style="padding-top: 10px"> To change Quantity, Edit Quantity and Click on Update button</p>
+<table id="cart" class="table table-hover table-condensed table-borderless">
+   <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+      <th></th>
+    </tr>
+  </thead>
+    <tr *ngFor="let cart of cartlist">
+      <td >
+       {{cart.productname}}
+      </td>
+      <td  >{{cart.price | currency:'USD'}}</td>
+      <td>
+         
+          <div class="row">
+              <div class="col-6">
+                  <input type="number" value="{{cart.quantity}}" #quant>
+                  <input type="hidden" value="{{cart.bufcartId}}" #prod>
+              </div>
+              <div class="col-6">
+                  <button class="btn btn-info btn-sm" (click)="update(prod,quant)">Update</button>
+              </div>
+            </div>
+        </td>
+        <td>
+          {{cart.quantity*cart.price | currency:'USD'}}
+
+        </td>
+              <td >
+                  <button class="btn btn-info btn-sm"(click)="delete(prod)">Delete</button> 
+              </td>
+    </tr>
+</table>
+
+<div class="row">
+  <div class="col-9">Total Sum : {{totalSum | currency:'USD'}}</div>
+  <div class="offset-1 col-2"><button type="button" class="btn btn-primary align-right" (click)="place()" >Checkout <i class="fa fa-angle-right"></i></button></div>
+ 
+</div>
+
+</div>
+
+       

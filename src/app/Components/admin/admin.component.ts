@@ -13,10 +13,10 @@ import { Route } from '@angular/compiler/src/core';
 export class AdminComponent implements OnInit {
   products:Product[]=[];
   fileToUpload:File=null;
-  
+  showAdd=false;
   auth:string;
   constructor(private api:ApiService,private router:Router) { }
-  imageUrl:string="/assets/img/bg.jpg";
+  imageUrl:string="/assets/img/noimage.png";
   ngOnInit() {
     if(this.api.isAuthenticated){
       this.auth=this.api.getToken();
@@ -35,20 +35,24 @@ export class AdminComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
   }
-
+show(){
+  this.showAdd=true;
+}
+hide(){
+  this.showAdd=false;
+}
   addProd(desc,quan,price,prodname,image){
     this.api.addProduct(this.auth,desc.value,quan.value,price.value,prodname.value,this.fileToUpload).subscribe(res => {
-      console.log(res);
+      this.products=res.oblist;
     });
   }
   delProd(prodid){
     
     this.api.delProduct(this.auth,prodid.value).subscribe(res=>{
-      console.log(res);
+      this.products=res.oblist;
     });
 
   }
-
   edit(prodid){
     let navigationExtras: NavigationExtras = {
       queryParams: {

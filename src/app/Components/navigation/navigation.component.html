@@ -1,43 +1,52 @@
-<nav class="navbar navbar-expand-lg   navbar-dark bg-dark">
-    <div class="collapse navbar-collapse" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01"  [ngSwitch]="loggedType">
+     
+
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0"  *ngSwitchCase="'home'">
+        <li class="nav-item">
+            <a class=" nav-link" routerLink="/register">Register</a> 
+        </li>
+        <li class="nav-item">
+            <a class=" nav-link" routerLink="/login">Login</a> 
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngSwitchCase="'customer'">
+        <li class="nav-item">
+            <a class=" nav-link" routerLink="/home">Home</a> 
+        </li>
+        <li class="nav-item">
+          
+            <a class=" nav-link" routerLink="/home/address">Address</a>
+        </li>
+        <li class="nav-item">
+          
+            <a class=" nav-link" routerLink="/home/cart">Cart</a>
+        </li>
         
-        
-        <div [ngSwitch]="loggedType">
-            <div   *ngSwitchCase="'home'" >
-                    <div class="navbar-nav">
-                <a class="nav-item nav-link" routerLink="/register"><h2>Register</h2></a> 
-                <a class="nav-item nav-link" routerLink="/login"><h2>Login</h2></a> 
-            </div>
-              </div>
-          <div   *ngSwitchCase="'customer'" >
-                <div class="navbar-nav">
-              
-                    <div class="col-1">
-                            <a class="nav-item nav-link" routerLink="/home"><h2>Home</h2></a> 
-                           
-                    </div>
-                    <div class="offset-2 col-1">
-                            
-                            <a class="nav-item nav-link" routerLink="/home/address"><h2>Address</h2></a>
-                            
-                    </div>
-                    <div class="offset-2 col-1">
-                            
-                            <a class="nav-item nav-link" routerLink="/home/cart"><h2>Cart</h2></a>
-                    </div>
-                    <div class="offset-10 col-4" style="margin-right: 10px">
-                            <a class="nav-item nav-link" (click)="logout()"><h2>Log out</h2></a> 
-                    </div>
-        </div>
-          </div>
-          <div   *ngSwitchCase="'admin'" >
-                <div class="navbar-nav">
-              <a class="nav-item nav-link" routerLink="/admin"><h2>Home</h2></a> 
-              <a class="nav-item nav-link" (click)="logout()"><h2>Log out</h2></a> 
-            </div>
-            </div>
-        </div>
+        <li class="nav-item">
+          
+            <a class=" nav-link" (click)="logout()" style="cursor: pointer;">Log out</a> 
+
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0 " *ngSwitchCase="'admin'" >
+      
+        <li class="nav-item">
+            <a class=" nav-link" routerLink="/admin">Home</a> 
+        </li>
+        <li class="nav-item">
+            <a class=" nav-link" routerLink="admin/order">Orders</a> 
+        </li>
+        <li class="nav-item">
+           
+            <a class=" nav-link" (click)="logout()">Log out</a> 
+        </li>
+      </ul>
+     
     </div>
-    
-  
-</nav>
+  </nav>

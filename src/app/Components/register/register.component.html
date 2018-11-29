@@ -1,81 +1,28 @@
 <div class="container">
-    
-        <div>
-            <span ><h2>Registration</h2></span>
-            <form class="form-horizontal " #f="ngForm"
-             (ngSubmit)="f.form.valid && register()" novalidate >
-            
-            
-                    <div class="form-group">
-                    
-                    <div class="col">
-                    User Name:<input type="text" 
-                    name="username" 
-                    class="form-control" 
-                    [(ngModel)]="model.username"
-                    #name="ngModel"
-                    [ngClass]="{'is-invalid':f.submitted && name.invalid}"
-                    required />
-
-                    <div *ngIf="f.submitted && name.invalid" class="invalid-input">
-                        <!-- individual validation erros -->
-                        <div *ngIf="name.errors?.required">Field is required</div>
-                    </div>
-                    </div>
-                    </div>
-                  
-                   
-                    <div class="form-group">
-                        
-                        <div class="col">
-                              Email:  
-                              <input type="email" 
-                              name="email" 
-                              class="form-control" 
-                              [(ngModel)]="model.email" 
-                              #email="ngModel"
-                                [ngClass]="{'is-invalid':f.submitted && email.invalid}"
-                                required email/>
-                    <div *ngIf="f.submitted && email.invalid" class="invalid-input">
-                            <!-- individual validation erros -->
-                            <div *ngIf="email.errors?.required">Field is required</div>
-                            <div *ngIf="email.errors?.email">Field is not email</div>
+        <br>
+           <div class="row">
+                <div class="col-4">
+                        <div class="text-center">
+                                <img src="assets/img/register1.jpg" class="rounded" alt="..." style="width:50%">
+                         </div>
+                </div>
+                <div class="col-8">
+                    <form [formGroup]="registerForm" (ngSubmit)="register()" >
+                        <div class="form-group">
+                            <input class="form-control"  formControlName="email" placeholder="Enter your Email" style="width:50%">
                         </div>
+                        <div class="form-group">
+                            <input class="form-control" formControlName="username" placeholder="Enter your username" style="width:50%">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        
-                        <div class="col">
-                        Age:  <input type="number" 
-                        name="age" 
-                        class="form-control" 
-                        [(ngModel)]="model.age"
-                        #age="ngModel"
-                        [ngClass]="{'is-invalid':f.submitted && age.invalid}"
-                                required number />
-                    <div *ngIf="f.submitted && age.invalid" class="invalid-input">
-                            <!-- individual validation erros -->
-                            <div *ngIf="age.errors?.required">Field is required</div>
-                            <div *ngIf="age.errors?.number">Field must be number</div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        
-                        <div class="col">
-                        Password:   <input type="text" name="password" class="form-control" [(ngModel)]="model.password"/>
-                                        
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col ">
-                            <input type="submit"  value="Register" class="btn btn-primary" />
-                        </div>
-                    </div> 
-                
-            </form>
-        </div>
-    
-  
-    
-    </div>
+                        <div class="form-group">
+                                <input class="form-control"  formControlName="password" placeholder="Enter your password" style="width:50%">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" formControlName="age" placeholder="Enter your age" style="width:50%">
+                            </div>
+                        <input type="submit" class="btn btn-secondary align-right" value="Register">
+                        </form> 
+                </div>
+           </div>
+               
+    <div>

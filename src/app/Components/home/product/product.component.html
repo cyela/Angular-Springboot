@@ -1,0 +1,11 @@
+
+
+
+        <div class="card">
+        <div class="card-body">
+        <h5 class="card-title">{{product.productname}}</h5>
+        <img src="data:image/png;base64,{{product.productimage}}" class="img-responsive" height="150px" width="200px" alt="Image">
+        <p class="card-text"> {{product.description}}</p>
+        <button class="btn btn-primary" style="text-align: right" (click)="addToCart()">Add to cart</button>
+        </div>
+        </div>
