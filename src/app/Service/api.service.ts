@@ -25,6 +25,7 @@ private ADD_PRD_API="http://localhost:8087/admin/addProduct";
 private DEL_PRD_API="http://localhost:8087/admin/delProduct";
 private UPD_PRD_API="http://localhost:8087/admin/updateProducts";
 private ORD_API="http://localhost:8087/admin/viewOrders";
+private UPD_ORD_API="http://localhost:8087/admin/updateOrder";
 
 constructor(@Inject(SESSION_STORAGE) private storage:StorageService,private http:HttpClient) { 
 
@@ -133,6 +134,14 @@ delProduct(auth:string,prodid:number){
 getOrders(auth:string){
   const myheader=new HttpHeaders().set('AUTH_TOKEN',auth);
   return this.http.get<any>(this.ORD_API,{headers:myheader})
+}
+
+update(auth:string,order:any){
+  const myheader=new HttpHeaders().set('AUTH_TOKEN',auth);
+   const formData:FormData=new FormData();
+   formData.append("orderId",order.orderId);
+  formData.append("orderStatus",order.orderStatus);
+  return this.http.post<any>(this.UPD_ORD_API,formData,{headers:myheader})
 }
 
 // delete Product for Logged Admin User
