@@ -18,7 +18,6 @@ E-Commerce application developed for performing Admin and Customer user role ope
   * Updating/ Deleting the Product
   * Placing the order
 
-#### System requirements
 * Technologies: 
   * Angular 6
   * Typescript
