@@ -20,6 +20,10 @@ import { AddressComponent } from './Components/home/address/address.component';
 import { EditItemComponent } from './Components/admin/edit-item/edit-item.component';
 import { OrderItemComponent } from './Components/admin/order-item/order-item.component';
 const appRoutes:Routes=[
+  { path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
 {
   path:'login',
   component: LoginComponent

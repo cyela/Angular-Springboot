@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from './Service/api.service';
 import { Router } from '@angular/router';
 
@@ -10,17 +10,17 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private auth:ApiService, private router:Router){
+  constructor(private auth: ApiService, private router: Router) {
 
   }
   ngOnInit() {
-    if(this.auth.isAuthenticated!=null){
-    if(this.auth.isAuthenticated && this.auth.getAuthType()=="customer"){
-      this.router.navigate(["/home"]);
-    }else if(this.auth.isAuthenticated && this.auth.getAuthType()=="admin"){
-      this.router.navigate(["/admin"]);
-    }
-  }else if(this.auth.isAuthenticated==null){
+    if (this.auth.isAuthenticated != null) {
+      if (this.auth.isAuthenticated && this.auth.getAuthType() == "customer") {
+        this.router.navigate(["/home"]);
+      } else if (this.auth.isAuthenticated && this.auth.getAuthType() == "admin") {
+        this.router.navigate(["/admin"]);
+      }
+    } else if (this.auth.isAuthenticated == null) {
       this.router.navigate(["/login"]);
     }
   }

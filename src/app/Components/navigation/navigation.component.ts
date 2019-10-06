@@ -8,28 +8,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  private loggedType:string;
-  constructor(private auth:ApiService,private route:Router) {
-    
-    if(this.auth.getAuthType()==null){
-      this.loggedType="home";
-  }else{
-      
-      if(this.auth.getAuthType()=="customer"){
-        
-        this.loggedType="customer";
-    }else if(this.auth.getAuthType()=="admin"){
-      this.loggedType="admin";
+  private loggedType: string;
+  constructor(private auth: ApiService, private route: Router) {
+
+    if (this.auth.getAuthType() == null) {
+      this.loggedType = "home";
+    } else {
+      if (this.auth.getAuthType() == "customer") {
+        this.loggedType = "customer";
+      } else if (this.auth.getAuthType() == "admin") {
+        this.loggedType = "admin";
+      }
     }
-    }
-   }
+  }
 
   ngOnInit() {
-     //console.log(this.auth.getAuthType());
-   
+    //console.log(this.auth.getAuthType());
+
   }
-  logout(){
-    this.loggedType="home";
+  logout() {
+    this.loggedType = "home";
     this.auth.removeToken();
     this.route.navigate(['/login']);
   }

@@ -1,3 +1,9 @@
-.invalid-input{
-    color:red;
+.invalid-input {
+  color: red;
+}
+.login{
+  background-image:  url(/assets/img/login.png);
+}
+.row{
+  margin-top: 15px;
 }

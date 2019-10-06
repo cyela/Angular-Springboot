@@ -9,12 +9,12 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
-  private loginForm:any;
-  
-  constructor(private apiService:ApiService,
-                private router:Router,
-                  private formBuilder:FormBuilder) { 
+
+  private loginForm: any;
+  error = false;
+  constructor(private apiService: ApiService,
+    private router: Router,
+    private formBuilder: FormBuilder) {
     this.createForm();
   }
 
@@ -22,28 +22,35 @@ export class LoginComponent implements OnInit {
   }
   createForm() {
     this.loginForm = this.formBuilder.group({
-      email:'',
-      password:''
+      email: '',
+      password: ''
     });
   }
-  login():void{
+  login(): void {
     this.apiService.userLogin(this.loginForm.value).
-    subscribe(res=>{
-      if(res.status=="200"){
-          this.apiService.storeToken(res.auth_TOKEN,"customer");
+      subscribe(res => {
+        if (res.status == "200") {
+          this.apiService.storeToken(res.auth_TOKEN, "customer");
           this.router.navigate(['/home']);
-      }
-    },
-    err=>{
-      this.apiService.adminLogin(this.loginForm.value).
-      subscribe(res=>{
-          if(res.status=="200"){
-            this.apiService.storeToken(res.auth_TOKEN,"admin");
-            this.router.navigate(['/admin']);
-          }else{
-            this.router.navigate(['/login']);
-          }
+          this.error = false;
+        } else if (res.status == "500") {
+          this.apiService.adminLogin(this.loginForm.value).
+            subscribe(res => {
+              if (res.status == "200") {
+                this.apiService.storeToken(res.auth_TOKEN, "admin");
+                this.router.navigate(['/admin']);
+              } else {
+                this.router.navigate(['/login']);
+              }
+              this.error = false;
+            },
+              err => {
+                console.log(err);
+              });
+        }
+      },
+        err => {
+          console.log(err);
       });
-    });
   }
 }

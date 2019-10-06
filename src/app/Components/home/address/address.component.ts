@@ -10,34 +10,34 @@ import { Router } from '@angular/router';
 })
 export class AddressComponent implements OnInit {
 
-  private addressForm:any;
-  model:Address={
-    address:'',
-    city:'',
-    state:'',
-    country:'',
-    zipcode:'',
-    phonenumber:''
+  private addressForm: any;
+  model: Address = {
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    zipcode: '',
+    phonenumber: ''
 
   };
-  auth:string;
-  constructor(private api:ApiService, private route:Router) { }
+  auth: string;
+  constructor(private api: ApiService, private route: Router) { }
 
   ngOnInit() {
-    this.auth=this.api.getToken();
-    this.api.getAddress(this.auth).subscribe(res=>{
-      if(res.map!=null){
-      this.model=res.map;
-    }
-    },err=>{
+    this.auth = this.api.getToken();
+    this.api.getAddress(this.auth).subscribe(res => {
+      if (res.map != null) {
+        this.model = res.map;
+      }
+    }, err => {
       console.log(err);
     });
   }
 
-  addAddress(){
-    this.api.upAddress(this.auth,this.model).subscribe(res=>{
+  addAddress() {
+    this.api.upAddress(this.auth, this.model).subscribe(res => {
       console.log(res);
-     this.route.navigate(['/home']);
+      this.route.navigate(['/home']);
     });
   }
 

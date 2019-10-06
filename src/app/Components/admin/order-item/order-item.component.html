@@ -1,32 +1,33 @@
-
+<app-navigation></app-navigation>
 <div class="container">
     <br>
-<div  class="row"> 
-    <div class="col-6 align-left" *ngFor="let order of orderlist">
-        <div class="card">
+    <div class="row">
+        <div class="col-6 align-left" *ngFor="let order of orderlist">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6" >
-                <p class="card-title"><b>Order By:</b> {{order.orderBy}}</p>
-                <p class="card-text"><b>Status:</b> {{order.orderStatus}}</p>
+                        <div class="col-6">
+                            <p class="card-title"><b>Order By:</b> {{order.orderBy}}</p>
+                            <p class="card-text"><b>Status:</b> {{order.orderStatus}}</p>
                         </div>
-                        
-                <div class="col-6" >
-                        <button class="btn btn-secondary" (click)="update(order.orderId)" >Update Status</button>
+
+                        <div class="col-6">
+                            <button class="btn btn-secondary" (click)="approve(order.orderId)">Approve</button>
+                            <button style="margin-left: 10px;" class="btn btn-secondary" (click)="decline(order.orderId)">Decline</button>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <h5>Order Details</h5>
-                <div class="row">
-                    <div class="col" *ngFor="let buf of order.products">
-                        <p class="card-title"> {{buf.productname}}</p>
-                        <p class="card-text"> Price : {{buf.price  | currency:'USD'}}</p>
-                        <p class="card-text">Quantity:  {{buf.quantity}}</p>
+                    <br>
+                    <h5>Order Details</h5>
+                    <div class="row">
+                        <div class="col" *ngFor="let buf of order.products">
+                            <p class="card-title"> {{buf.productname}}</p>
+                            <p class="card-text"> Price : {{buf.price  | currency:'USD'}}</p>
+                            <p class="card-text">Quantity: {{buf.quantity}}</p>
+                        </div>
+
                     </div>
-                   
                 </div>
             </div>
         </div>
-     </div>
-   </div>
+    </div>
 </div>

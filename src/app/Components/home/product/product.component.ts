@@ -11,17 +11,17 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  
+
   @Input() public product;
 
-  @Output() productAddToCart:EventEmitter<Product>=new EventEmitter<Product>();
-  constructor(private http:HttpClient) { }
+  @Output() productAddToCart: EventEmitter<Product> = new EventEmitter<Product>();
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-   
+
   }
 
-  addToCart(){
+  addToCart() {
     this.productAddToCart.emit(this.product);
   }
 

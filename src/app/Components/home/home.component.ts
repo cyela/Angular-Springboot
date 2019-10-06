@@ -10,23 +10,23 @@ import { Product } from 'src/app/Model/product';
 })
 export class HomeComponent implements OnInit {
 
-  products:Product[]=[];
-  private auth_token:string;
-  constructor(private api:ApiService) { }
+  products: Product[] = [];
+  private auth_token: string;
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
-    if(this.api.isAuthenticated){
-    this.auth_token=this.api.getToken();
-    this.api.getProducts(this.auth_token).subscribe(
-        res=>{
-         this.products=res.oblist;
+    if (this.api.isAuthenticated) {
+      this.auth_token = this.api.getToken();
+      this.api.getProducts(this.auth_token).subscribe(
+        res => {
+          this.products = res.oblist;
         }
-    );
-      }
+      );
+    }
   }
 
-  addToCart(e){
-    this.api.addCartItems(e,this.auth_token).subscribe(res=>{
+  addToCart(e) {
+    this.api.addCartItems(e, this.auth_token).subscribe(res => {
       console.log(res);
     })
   }

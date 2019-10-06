@@ -10,32 +10,38 @@ import { Order } from 'src/app/Model/Order';
 })
 export class OrderItemComponent implements OnInit {
 
-  auth:string;
-  orderlist:any[]=[];
-  constructor(private route:Router,private api:ApiService) { }
+  auth: string;
+  orderlist: any[] = [];
+  constructor(private route: Router, private api: ApiService) { }
 
   ngOnInit() {
-    this.auth=this.api.getToken();
+    this.auth = this.api.getToken();
     this.getOrderList();
-    console.log(this.orderlist);
   }
 
-  update(orderid){
-
-    let order={
-      "orderId":orderid,
-      "orderStatus":"Approved"
+  approve(orderid) {
+    let order = {
+      "orderId": orderid,
+      "orderStatus": "Approved"
     }
-    this.api.update(this.auth,order).subscribe(res=>{
+    this.api.update(this.auth, order).subscribe(res => {
       this.getOrderList();
     });
-    
-
   }
 
-  getOrderList(){
-    this.api.getOrders(this.auth).subscribe(res=>{
-     this.orderlist=res.orderlist;
+  decline(orderid) {
+    let order = {
+      "orderId": orderid,
+      "orderStatus": "Declined"
+    }
+    this.api.update(this.auth, order).subscribe(res => {
+      this.getOrderList();
+    });
+  }
+
+  getOrderList() {
+    this.api.getOrders(this.auth).subscribe(res => {
+      this.orderlist = res.orderlist;
     });
   }
 

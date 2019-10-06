@@ -1,22 +1,21 @@
-<div class="container">
-    <br>
-       <div class="row">
-            <div class="col-4">
-                    <div class="text-center">
-                            <img src="assets/img/login.jpg" class="rounded" alt="..." style="width:50%">
-                     </div>
-            </div>
-            <div class="col-8">
-                <form [formGroup]="loginForm" (ngSubmit)="login()" >
-                    <div class="form-group">
-                        <input class="form-control"  formControlName="email" placeholder="Enter your Email" style="width:50%">
+<app-navigation></app-navigation>
+<div class="container ">
+    <div class="row">
+        <div class="offset-2 col-6">
+            <div class="card login shadow p-3 mb-5 bg-white rounded ">
+                    <div class="card-body">
+                            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                                <div *ngIf="error">Content to render when condition is true.</div>
+                                <div class="form-group">
+                                    <input class="form-control" formControlName="email" placeholder="xyz@gmail.com" style="width:50%">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Password" style="width:50%">
+                                </div>
+                                <input type="submit" class="btn btn-secondary align-right" value="Login">
+                            </form>
                     </div>
-                    <div class="form-group">
-                        <input class="form-control" formControlName="password" placeholder="Enter your password" style="width:50%">
-                    </div>
-                    <input type="submit" class="btn btn-secondary align-right" value="Login">
-                    </form> 
             </div>
-       </div>
-           
-<div>
+        </div>
+    </div>
+    <div>

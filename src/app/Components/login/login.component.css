@@ -1,0 +1,9 @@
+.login{
+    background-image:  url(/assets/img/login.png);
+}
+.card{
+    height: 200px;
+}
+.row{
+    margin-top: 15px;
+}

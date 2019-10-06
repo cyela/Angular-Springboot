@@ -1,55 +1,71 @@
+<app-navigation></app-navigation>
 <div class="container">
-    <br>
-    <button class="btn btn-secondary" (click)="show()" *ngIf="!showAdd">Click me to Add</button>
-    <button class="btn btn-secondary" (click)="hide()" *ngIf="showAdd">Click me to hide</button>
-    <br>
-          <form class="form-horizontal " #f="ngForm" (ngSubmit)="f.form.valid && addProd(desc,quan,price,prodname,image)" *ngIf="showAdd">
-            <div class="row">
-                <div class="col-8">
-                        <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Product Name" #prodname ngModel name="prodname" >
-                        </div>
-                        <div class="form-group">
-                                <textarea type="text" class="form-control" placeholder="description"  name="desc" #desc ngModel rows="5"></textarea>
-                        </div>
-                        <div class="form-group">
-                                <input type="text" class="form-control" placeholder="quantity" name="quan" #quan ngModel>
-                        </div>
-                        <div class="form-group">
-                                <input type="text" class="form-control" placeholder="price" name="price" #price ngModel >
-                        </div>
-                        <div class="form-group">
-                                <input type="file" class="form-control" placeholder="Product Picture" #image accept="image/*" 
-                                name="image" (change)="handleFileInput($event.target.files)">
-                        </div>
+        <div class="row">
+                <div class="col-12">
+                        <button class="mybtn btn btn-secondary" (click)="show()" *ngIf="!showAdd">Click to Add</button>
+                        <button class="mybtn btn btn-secondary" (click)="hide()" *ngIf="showAdd">Click to hide</button>
                 </div>
-                <div class="col-4">
-                        <img [src]="imageUrl"  style="width:250px;height: 200px;">
+        </div>
+        <form class="form-horizontal shadow p-3 mb-5 bg-white rounded " #f="ngForm" (ngSubmit)="f.form.valid && addProd(desc,quan,price,prodname,image)"
+                *ngIf="showAdd">
+                <div class="row">
+                        <div class="col-6">
+                                <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Product Name" #prodname
+                                                ngModel name="prodname">
+                                </div>
+                                <div class="form-group">
+                                        <textarea type="text" class="form-control" placeholder="description" name="desc"
+                                                #desc ngModel rows="5"></textarea>
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="quantity" name="quan" #quan
+                                                ngModel>
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="price" name="price" #price
+                                                ngModel>
+                                </div>
+                                <div class="form-group">
+                                        <input type="file" class="form-control" placeholder="Product Picture" #image
+                                                accept="image/*" name="image"
+                                                (change)="handleFileInput($event.target.files)">
+                                </div>
+                        </div>
+                        <div class="col-6">
+                                <h4 class="text-center">Image preview</h4>
+                                <img [src]="imageUrl" style="width:400px;height: 300px;">
+
+                        </div>
                         
                 </div>
-            <input type="submit" class=" btn btn-primary" value="Add Product">
-            </div>
-        </form>
-<hr>
-    <div  class="row"> 
-        <div class="col-3 align-left" *ngFor="let product of products">
-            <div class="card">
-                    <div class="card-body">
-                    <h5 class="card-title">{{product.productname}}</h5>
-                    <img src="data:image/png;base64,{{product.productimage}}" class="img-responsive" height="150px" width="200px" alt="Image">
-                    <p class="card-text"> {{product.description}}</p>
-                    <input type="hidden" value={{product.productid}} #prdid >
-                    <div class="row">
+                <div class="row">
                         <div class="col-6">
-                                <button class="btn btn-secondary" (click)="edit(prdid)" >Edit Items</button>
+                                <input type="submit" class=" btn btn-primary" value="Add Product">
                         </div>
-                        <div class="col-6">
-                                <button class="btn btn-danger" (click)="delProd(prdid)">Remove</button>
-                        </div>
-                    </div>
                 </div>
-            </div>
-         </div>
-       </div>
-    </div>
-          
+        </form>
+        <hr>
+        <div class="row">
+                <div class="col-3 align-left" *ngFor="let product of products">
+                        <div class="card shadow p-3 mb-5 bg-white rounded">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{product.productname}}</h5>
+                                        <img src="data:image/png;base64,{{product.productimage}}" class="img-responsive"
+                                                height="150px" width="200px" alt="Image">
+                                        <p class="card-text"> {{product.description}}</p>
+                                        <input type="hidden" value={{product.productid}} #prdid>
+                                        <div class="row">
+                                                <div class="col-6">
+                                                        <button class="btn btn-secondary" (click)="edit(prdid)">Edit</button>
+                                                </div>
+                                                <div class="col-6">
+                                                        <button class="btn btn-danger"
+                                                                (click)="delProd(prdid)">Remove</button>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>

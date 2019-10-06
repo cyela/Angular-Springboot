@@ -1,52 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01"  [ngSwitch]="loggedType">
-     
-
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0"  *ngSwitchCase="'home'">
-        <li class="nav-item">
-            <a class=" nav-link" routerLink="/register">Register</a> 
-        </li>
-        <li class="nav-item">
-            <a class=" nav-link" routerLink="/login">Login</a> 
-        </li>
-      </ul>
-
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngSwitchCase="'customer'">
-        <li class="nav-item">
-            <a class=" nav-link" routerLink="/home">Home</a> 
-        </li>
-        <li class="nav-item">
-          
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01" [ngSwitch]="loggedType">
+      <div *ngSwitchCase="'home'">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class=" nav-link" routerLink="/register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class=" nav-link" routerLink="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+      <div class="ml-auto" *ngSwitchCase="'customer'">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class=" nav-link" routerLink="/home">Home</a>
+          </li>
+          <li class="nav-item">
             <a class=" nav-link" routerLink="/home/address">Address</a>
-        </li>
-        <li class="nav-item">
-          
+          </li>
+          <li class="nav-item">
             <a class=" nav-link" routerLink="/home/cart">Cart</a>
-        </li>
-        
-        <li class="nav-item">
-          
-            <a class=" nav-link" (click)="logout()" style="cursor: pointer;">Log out</a> 
-
-        </li>
-      </ul>
-
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0 " *ngSwitchCase="'admin'" >
-      
-        <li class="nav-item">
-            <a class=" nav-link" routerLink="/admin">Home</a> 
-        </li>
-        <li class="nav-item">
-            <a class=" nav-link" routerLink="admin/order">Orders</a> 
-        </li>
-        <li class="nav-item">
-           
-            <a class=" nav-link" (click)="logout()" style="cursor: pointer;">Log out</a> 
-        </li>
-      </ul>
-     
+          </li>
+          <li class="nav-item">
+            <a class=" nav-link " (click)="logout()" style="cursor: pointer; float: right;">Log out</a>
+          </li>
+        </ul>
+      </div>
+      <div class="ml-auto" *ngSwitchCase="'admin'">
+        <ul class="navbar-nav mt-2 mt-lg-0 ">
+          <li class="nav-item">
+            <a class=" nav-link" routerLink="/admin">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class=" nav-link" routerLink="/admin/order">Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class=" nav-link" (click)="logout()" style="cursor: pointer;">Log out</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
+</div>
