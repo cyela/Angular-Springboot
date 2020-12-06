@@ -27,30 +27,20 @@ export class LoginComponent implements OnInit {
     });
   }
   login(): void {
-    this.apiService.userLogin(this.loginForm.value).
+    this.apiService.login(this.loginForm.value).
       subscribe(res => {
-        if (res.status == "200") {
-          this.apiService.storeToken(res.auth_TOKEN, "customer");
+        if (res.status == "200" && res.userType == "CUSTOMER") {
+          this.apiService.storeToken(res.authToken, "customer");
           this.router.navigate(['/home']);
           this.error = false;
-        } else if (res.status == "500") {
-          this.apiService.adminLogin(this.loginForm.value).
-            subscribe(res => {
-              if (res.status == "200") {
-                this.apiService.storeToken(res.auth_TOKEN, "admin");
-                this.router.navigate(['/admin']);
-              } else {
-                this.router.navigate(['/login']);
-              }
-              this.error = false;
-            },
-              err => {
-                console.log(err);
-              });
+        } else if (res.status == "200" && res.userType == "ADMIN") {
+          this.apiService.storeToken(res.authToken, "admin");
+          this.router.navigate(['/admin']);
+          this.error = false;
         }
       },
         err => {
-          console.log(err);
+          this.router.navigate(['/login']);
       });
   }
 }

@@ -27,7 +27,7 @@ export class EditItemComponent implements OnInit {
   constructor(private route: ActivatedRoute, private api: ApiService) {
     if (this.api.isAuthenticated) {
       this.auth = this.api.getToken();
-      this.api.getProducts(this.auth).subscribe(
+      this.api.getProducts().subscribe(
         res => {
           res.oblist.forEach(pro => {
             if (pro.productid == this.prodid) {
@@ -55,8 +55,9 @@ export class EditItemComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
   }
 
-  updateProd(desc, quan, price, prodname, image) {
-    this.api.updateProduct(this.auth, desc.value, quan.value, price.value, prodname.value, this.fileToUpload, this.product.productid).subscribe(res => {
+  updateProd(desc:any, quan:any, price:any, prodname:any, image:any) {
+    console.log(this.product.productid)
+    this.api.updateProduct(desc.value, quan.value, price.value, prodname.value, this.fileToUpload, this.product.productid).subscribe(res => {
       console.log(res);
     });
   }

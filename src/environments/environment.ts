@@ -3,7 +3,24 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl:"http://localhost:8087",
+  signupUrl : "/home/signup",
+  loginUrl : "/home/auth",
+  addToCartUrl : "/user/addToCart",
+  viewCartUrl : "/user/viewCart",
+  updateCartUrl : "/user/updateCart",
+  deleteCartUrl: "/user/delCart",
+  addAddressUrl : "/user/addAddress",
+  viewAddressUrl : "/user/getAddress",
+  productsUrl : "/user/getProducts",
+  addProductUrl : "/admin/addProduct",
+  deleteProductUrl : "/admin/delProduct",
+  updateProductUrl : "/admin/updateProducts",
+  viewOrderUrl : "/admin/viewOrders",
+  updateOrderUrl : "/admin/updateOrder",
+  placeOrderUrl : "/user/placeOrder",
+  logoutUrl : "/home/logout",
 };
 
 /*
@@ -12,4 +29,4 @@ export const environment = {
  * import the following file, but please comment it out in production mode
  * because it will have performance impact when throw error
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error',  // Included with Angular CLI.

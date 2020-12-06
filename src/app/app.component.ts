@@ -14,14 +14,13 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit() {
-    if (this.auth.isAuthenticated != null) {
-      if (this.auth.isAuthenticated && this.auth.getAuthType() == "customer") {
+      if (this.auth.isAuthenticated()!=null && this.auth.getAuthType() == "customer") {
         this.router.navigate(["/home"]);
-      } else if (this.auth.isAuthenticated && this.auth.getAuthType() == "admin") {
+      } else if (this.auth.isAuthenticated()!=null && this.auth.getAuthType() == "admin") {
         this.router.navigate(["/admin"]);
+      } else {
+        this.router.navigate(["/login"]);
       }
-    } else if (this.auth.isAuthenticated == null) {
-      this.router.navigate(["/login"]);
-    }
+   
   }
 }

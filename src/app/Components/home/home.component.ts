@@ -11,13 +11,11 @@ import { Product } from 'src/app/Model/product';
 export class HomeComponent implements OnInit {
 
   products: Product[] = [];
-  private auth_token: string;
   constructor(private api: ApiService) { }
 
   ngOnInit() {
     if (this.api.isAuthenticated) {
-      this.auth_token = this.api.getToken();
-      this.api.getProducts(this.auth_token).subscribe(
+      this.api.getProducts().subscribe(
         res => {
           this.products = res.oblist;
         }
@@ -26,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   addToCart(e) {
-    this.api.addCartItems(e, this.auth_token).subscribe(res => {
+    this.api.addToCart(e).subscribe(res => {
       console.log(res);
     })
   }

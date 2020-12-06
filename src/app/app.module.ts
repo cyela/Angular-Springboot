@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {StorageServiceModule} from 'angular-webstorage-service';
 import {Router, Routes, RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { NavigationComponent } from './Components/navigation/navigation.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
@@ -19,6 +19,7 @@ import { CartItemComponent } from './Components/home/cart-item/cart-item.compone
 import { AddressComponent } from './Components/home/address/address.component';
 import { EditItemComponent } from './Components/admin/edit-item/edit-item.component';
 import { OrderItemComponent } from './Components/admin/order-item/order-item.component';
+import { AuthInterceptor } from './Service/AuthInterceptor';
 const appRoutes:Routes=[
   { path: '',
     redirectTo: '/login',
@@ -90,7 +91,11 @@ const appRoutes:Routes=[
     NgbModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{
+    provide : HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi   : true,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

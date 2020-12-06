@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/Service/api.service';
-import { Order } from 'src/app/Model/Order';
 
 @Component({
   selector: 'order-item',
@@ -19,28 +18,28 @@ export class OrderItemComponent implements OnInit {
     this.getOrderList();
   }
 
-  approve(orderid) {
+  approve(orderid:any) {
     let order = {
       "orderId": orderid,
       "orderStatus": "Approved"
     }
-    this.api.update(this.auth, order).subscribe(res => {
+    this.api.updateStatusForOrder( order).subscribe(res => {
       this.getOrderList();
     });
   }
 
-  decline(orderid) {
+  decline(orderid:any) {
     let order = {
       "orderId": orderid,
       "orderStatus": "Declined"
     }
-    this.api.update(this.auth, order).subscribe(res => {
+    this.api.updateStatusForOrder(order).subscribe(res => {
       this.getOrderList();
     });
   }
 
   getOrderList() {
-    this.api.getOrders(this.auth).subscribe(res => {
+    this.api.getOrders().subscribe(res => {
       this.orderlist = res.orderlist;
     });
   }

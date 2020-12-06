@@ -5,34 +5,19 @@ import { Product } from '../Model/product';
 import { User } from '../Model/user';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 import { Address } from '../Model/address';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private REG_API = "http://localhost:8087/user/signup";
-  private LOGU_API = "http://localhost:8087/user/verify";
-  private LOGA_API = "http://localhost:8087/admin/verify";
-  private PRDLST_API = "http://localhost:8087/user/getProducts";
-  private ADD_CART_API = "http://localhost:8087/user/addToCart?productId=";
-  private VW_CART_API = "http://localhost:8087/user/viewCart";
-  private UP_CART_API = "http://localhost:8087/user/updateCart";
-  private DEL_CART_API = "http://localhost:8087/user/delCart";
-  private PLC_ORD_API = "http://localhost:8087/user/placeOrder";
-  private ADR_API = "http://localhost:8087/user/addAddress";
-  private GT_ADR_API = "http://localhost:8087/user/getAddress";
-  private ADD_PRD_API = "http://localhost:8087/admin/addProduct";
-  private DEL_PRD_API = "http://localhost:8087/admin/delProduct";
-  private UPD_PRD_API = "http://localhost:8087/admin/updateProducts";
-  private ORD_API = "http://localhost:8087/admin/viewOrders";
-  private UPD_ORD_API = "http://localhost:8087/admin/updateOrder";
-
+  
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient) {
 
   }
-  // Registering the users to the database
+  // Registering new users to the system
   register(user: User): Observable<any> {
-    return this.http.post(this.REG_API,
+    return this.http.post(environment.baseUrl+environment.signupUrl,
       JSON.stringify(user),
       {
         headers:
@@ -40,8 +25,8 @@ export class ApiService {
       });
   }
   // validating user credentials
-  userLogin(user: User): Observable<any> {
-    return this.http.post(this.LOGU_API,
+  login(user: User): Observable<any> {
+    return this.http.post(environment.baseUrl+environment.loginUrl,
       JSON.stringify(user),
       {
         headers:
@@ -49,130 +34,101 @@ export class ApiService {
       });
   }
 
-  // validating admin credentials
-  adminLogin(user: User): Observable<any> {
-    return this.http.post(this.LOGA_API,
-      JSON.stringify(user),
-      {
-        headers:
-          { 'Content-Type': 'application/json' }
-      });
-  }
-  // Fetching all the products from the database
-  getProducts(auth: string): Observable<any> {
-
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.post<any>(this.PRDLST_API, null, { headers: myheader });
-
+  logout(){
+    this.http.get<any>(environment.baseUrl+environment.logoutUrl);
   }
 
-  // Add Products to the user Cart
-  addCartItems(product: Product, auth: string): Observable<any> {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.ADD_CART_API + product.productid, { headers: myheader });
+  // Add Products to the Cart
+  addToCart(product: Product ): Observable<any> {
+    return this.http.get<any>(environment.baseUrl+environment.addToCartUrl +"?productId="+product.productid);
   }
 
-  // View Cart Items for the logged User
-
-  getCartItems(auth: string): Observable<any> {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.VW_CART_API, { headers: myheader });
+  // View Cart items
+  getCartItems(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl+environment.viewCartUrl);
   }
 
-  // add items to cart for the logged User
-  updateCart(auth: string, prodid: number, quant: number): Observable<any> {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.UP_CART_API + "?bufcartid=" + prodid + "&quantity=" + quant, { headers: myheader });
+  // update items quantity in the cart
+  updateCartItem(prodid: number, quant: number): Observable<any> {
+    var map = {
+      "id":prodid,
+      "quantity":quant
+    }
+    return this.http.put<any>(environment.baseUrl+environment.updateCartUrl, map);
   }
 
-  // delete cart Item from logged User's Cart item
-  delCart(auth: string, bufdid: number): Observable<any> {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.DEL_CART_API + "?bufcartid=" + bufdid, { headers: myheader });
+  // delete cart Item 
+  deleteCartItem(bufdid: number): Observable<any> {
+    return this.http.delete<any>(environment.baseUrl+environment.deleteCartUrl + "?bufcartid=" + bufdid);
   }
 
-  // place the order of logged User
-  place(auth: string): Observable<any> {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.PLC_ORD_API, { headers: myheader });
+  // update Address 
+  addOrUpdateAddress(adr: Address): Observable<any> {
+    return this.http.post<any>(environment.baseUrl+environment.addAddressUrl, adr);
   }
 
-  // update Address of logged User
-  upAddress(auth: string, adr: Address): Observable<any> {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.post<any>(this.ADR_API, adr, { headers: myheader });
+  // fetch address 
+  getAddress(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl+environment.viewAddressUrl);
   }
 
-  // fetch address of logged user
-  getAddress(auth: string): Observable<any> {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.post<any>(this.GT_ADR_API, null, { headers: myheader });
+   // Fetching all the products
+   getProducts(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl+environment.productsUrl);
   }
 
-
-  // Add product for Logged AdminUser
-
-  addProduct(auth: string, desc: string,
+  // Add product in the system
+  addProduct( desc: string,
     quan: string, price: string, prodname: string, image: File): Observable<any> {
-
     const formData: FormData = new FormData();
     formData.append("description", desc);
     formData.append("price", price);
     formData.append("productname", prodname);
     formData.append("quantity", quan);
     formData.append("file", image);
-
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.post<any>(this.ADD_PRD_API, formData, { headers: myheader });
+    return this.http.post<any>(environment.baseUrl+environment.addProductUrl, formData);
 
   }
-
-  // delete Product for Logged Admin User
-  delProduct(auth: string, prodid: number) {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.DEL_PRD_API + "?productid=" + prodid, { headers: myheader })
+  
+  // update Product for Logged Admin User
+  updateProduct( desc: string,
+    quan: string, price: string, prodname: string, image: File, productid: any): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append("description", desc);
+    formData.append("price", price);
+    formData.append("productname", prodname);
+    formData.append("quantity", quan);
+    formData.append("file", image);
+    formData.append("productId", productid);
+    return this.http.put<any>(environment.baseUrl+environment.updateProductUrl, formData);
   }
 
-  // delete Product for Logged Admin User
-  getOrders(auth: string) {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.ORD_API, { headers: myheader })
+  // delete Product
+  deleteProduct( prodid: number) {
+    return this.http.delete<any>(environment.baseUrl+environment.deleteProductUrl + "?productId=" + prodid);
   }
 
-  update(auth: string, order: any) {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
+  // fetch available orders placed
+  getOrders() {
+    return this.http.get<any>(environment.baseUrl+environment.viewOrderUrl)
+  }
+
+   // place the order 
+   placeOrder(): Observable<any> {
+    return this.http.get<any>(environment.baseUrl+environment.placeOrderUrl);
+  }
+
+  // update status for order
+  updateStatusForOrder( order: any) {
     const formData: FormData = new FormData();
     formData.append("orderId", order.orderId);
     formData.append("orderStatus", order.orderStatus);
-    return this.http.post<any>(this.UPD_ORD_API, formData, { headers: myheader })
-  }
-
-  // delete Product for Logged Admin User
-  upOrders(auth: string, prodid: number) {
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.get<any>(this.DEL_PRD_API + "?productid=" + prodid, { headers: myheader })
-  }
-
-  // update Product for Logged Admin User
-  updateProduct(auth: string, desc: string,
-    quan: string, price: string, prodname: string, image: File, productid: any): Observable<any> {
-
-    const formData: FormData = new FormData();
-    formData.append("description", desc);
-    formData.append("price", price);
-    formData.append("productname", prodname);
-    formData.append("quantity", quan);
-    formData.append("file", image);
-    formData.append("productid", productid);
-
-    const myheader = new HttpHeaders().set('AUTH_TOKEN', auth);
-    return this.http.post<any>(this.UPD_PRD_API, formData, { headers: myheader });
-
+    return this.http.post<any>(environment.baseUrl+environment.updateOrderUrl, formData)
   }
 
   // Authentication Methods 
 
-  public isAuthenticated(): boolean {
+  isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
 
@@ -187,7 +143,6 @@ export class ApiService {
     }
     return null;
   }
-
 
   getToken() {
     return this.storage.get("auth_token");

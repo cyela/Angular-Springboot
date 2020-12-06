@@ -26,7 +26,7 @@
             <input type="hidden" value="{{cart.bufcartId}}" #prod>
           </div>
           <div class="col-6">
-            <button class="btn btn-info btn-sm" (click)="update(prod,quant)">Update</button>
+            <button class="btn btn-info btn-sm" (click)="updateCart(prod,quant)">Update</button>
           </div>
         </div>
       </td>
@@ -35,14 +35,14 @@
 
       </td>
       <td>
-        <button class="btn btn-info btn-sm" (click)="delete(prod)">Delete</button>
+        <button class="btn btn-info btn-sm" (click)="deleteItem(prod)">Delete</button>
       </td>
     </tr>
   </table>
 
   <div class="row">
     <div class="col-9">Total Sum : {{totalSum | currency:'USD'}}</div>
-    <div class="offset-1 col-2"><button type="button" class="btn btn-primary align-right" (click)="place()">Checkout <i
+    <div class="offset-1 col-2"><button type="button" class="btn btn-primary align-right" (click)="placeOrder()">Checkout <i
           class="fa fa-angle-right"></i></button></div>
 
   </div>

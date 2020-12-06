@@ -5,7 +5,7 @@ export class Order {
     products: bufcart[];
 }
 
-class bufcart {
+export class bufcart {
     bufcartId: number;
     orderId: number;
     email: string;

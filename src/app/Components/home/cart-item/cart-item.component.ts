@@ -19,8 +19,7 @@ export class CartItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth = this.api.getToken();
-    this.api.getCartItems(this.auth).subscribe(res => {
+    this.api.getCartItems().subscribe(res => {
       this.cartlist = res.oblist;
       this.cartlist.forEach(value => {
         this.totalSum = this.totalSum + (value.quantity * value.price);
@@ -28,16 +27,16 @@ export class CartItemComponent implements OnInit {
     });
 
   }
-  update(id, quantity) {
-    this.api.updateCart(this.auth, id.value, quantity.value).subscribe(res => {
+  updateCart(id:any, quantity:any) {
+    this.api.updateCartItem(id.value, quantity.value).subscribe(res => {
       this.cartlist = res.oblist;
       this.cartlist.forEach(value => {
         this.totalSum = this.totalSum + (value.quantity * value.price);
       });
     });
   }
-  delete(id) {
-    this.api.delCart(this.auth, id.value).subscribe(res => {
+  deleteItem(id:any) {
+    this.api.deleteCartItem(id.value).subscribe(res => {
       this.cartlist = res.oblist;
       this.cartlist.forEach(value => {
         this.totalSum = this.totalSum + (value.quantity * value.price);
@@ -45,8 +44,8 @@ export class CartItemComponent implements OnInit {
     });
   }
 
-  place() {
-    this.api.place(this.auth).subscribe(res => {
+  placeOrder() {
+    this.api.placeOrder().subscribe(res => {
       console.log(res);
     });
     this.route.navigate(['/home']);

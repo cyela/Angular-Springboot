@@ -20,12 +20,10 @@ export class AddressComponent implements OnInit {
     phonenumber: ''
 
   };
-  auth: string;
   constructor(private api: ApiService, private route: Router) { }
 
   ngOnInit() {
-    this.auth = this.api.getToken();
-    this.api.getAddress(this.auth).subscribe(res => {
+    this.api.getAddress().subscribe(res => {
       if (res.map != null) {
         this.model = res.map;
       }
@@ -34,8 +32,8 @@ export class AddressComponent implements OnInit {
     });
   }
 
-  addAddress() {
-    this.api.upAddress(this.auth, this.model).subscribe(res => {
+  addOrUpdateAddress() {
+    this.api.addOrUpdateAddress(this.model).subscribe(res => {
       console.log(res);
       this.route.navigate(['/home']);
     });

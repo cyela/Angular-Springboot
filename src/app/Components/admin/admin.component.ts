@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     if (this.api.isAuthenticated) {
       this.auth = this.api.getToken();
-      this.api.getProducts(this.auth).subscribe(
+      this.api.getProducts().subscribe(
         res => {
           this.products = res.oblist;
         }
@@ -41,19 +41,20 @@ export class AdminComponent implements OnInit {
   hide() {
     this.showAdd = false;
   }
-  addProd(desc, quan, price, prodname, image) {
-    this.api.addProduct(this.auth, desc.value, quan.value, price.value, prodname.value, this.fileToUpload).subscribe(res => {
+  addProd(desc:any, quan:any, price:any, prodname:any, image:any) {
+    this.api.addProduct(desc.value, quan.value, price.value, prodname.value, this.fileToUpload).subscribe(res => {
       this.products = res.oblist;
     });
   }
-  delProd(prodid) {
+  delProd(prodid:any) {
 
-    this.api.delProduct(this.auth, prodid.value).subscribe(res => {
+    this.api.deleteProduct(prodid.value).subscribe(res => {
       this.products = res.oblist;
+      this.ngOnInit();
     });
-
+    
   }
-  edit(prodid) {
+  edit(prodid:any) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
         "user": prodid.value
