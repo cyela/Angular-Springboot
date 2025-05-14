@@ -1,0 +1,1 @@
+{"version":3,"file":"datepicker-i18n.ngfactory.js","sourceRoot":"","sources":["../../src/datepicker/datepicker-i18n.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}

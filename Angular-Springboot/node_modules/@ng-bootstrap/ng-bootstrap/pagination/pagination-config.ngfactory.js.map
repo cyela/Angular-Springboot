@@ -1,0 +1,1 @@
+{"version":3,"file":"pagination-config.ngfactory.js","sourceRoot":"","sources":["../../src/pagination/pagination-config.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"datepicker-day-view.ngfactory.js","sourceRoot":"","sources":["../../src/datepicker/datepicker-day-view.ngfactory.ts","../../src/datepicker/datepicker-day-view.ts.NgbDatepickerDayView.html"],"names":[],"mappings":";;;;;;;;;;;sECAA,8IAAc","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n","{{ date.day }}"]}

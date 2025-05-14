@@ -1,0 +1,1 @@
+{"version":3,"file":"ngb-calendar-islamic-umalqura.ngfactory.js","sourceRoot":"","sources":["../../../src/datepicker/hijri/ngb-calendar-islamic-umalqura.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}

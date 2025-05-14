@@ -1,0 +1,1 @@
+{"version":3,"file":"ngb-date-adapter.ngfactory.js","sourceRoot":"","sources":["../../../src/datepicker/adapters/ngb-date-adapter.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}

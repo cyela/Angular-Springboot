@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  angular:
+    build:
+      context: ./Angular-Springboot
+    ports:
+      - "4200:80"  # Mapping Angular's port to port 80 on the container
+    networks:
+      - app-network
+
+  springboot:
+    build:
+      context: ./Springboot-Web-Services/shopping
+    ports:
+      - "9090:9090"  # Mapping Spring Boot's port 9090
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/webservice
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: webservice
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
