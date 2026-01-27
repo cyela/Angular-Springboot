@@ -1,0 +1,48 @@
+name: Angular CI
+
+# Trigger the workflow on push or pull request to main
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # Step 2: Setup Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+
+    # Step 3: Cache node_modules for faster builds
+    - name: Cache Node modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    # Step 4: Install dependencies
+    - name: Install Dependencies
+      run: npm ci
+
+    # Step 5: Run unit tests
+    - name: Run Unit Tests
+      run: npm test -- --watch=false --browsers=ChromeHeadless
+
+    # Step 6: Build Angular project
+    - name: Build Angular Project
+      run: npm run build -- --prod
+
+    # Step 7: Upload build artifacts
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: angular-dist
+        path: dist/
