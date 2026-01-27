@@ -1,6 +1,6 @@
 name: Angular CI
 
-# Trigger the workflow on push or pull request to main
+# Trigger manually from the Actions tab
 on:
   workflow_dispatch:
 
@@ -42,7 +42,7 @@ jobs:
 
     # Step 7: Upload build artifacts
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: angular-dist
         path: dist/
