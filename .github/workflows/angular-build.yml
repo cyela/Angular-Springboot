@@ -38,7 +38,9 @@ jobs:
 
     # Step 6: Build Angular project
     - name: Build Angular Project
-      run: npm run build -- --prod
+      run: |
+        export NODE_OPTIONS=--openssl-legacy-provider
+        npm run build -- --prod
 
     # Step 7: Upload build artifacts
     - name: Upload Build Artifacts
