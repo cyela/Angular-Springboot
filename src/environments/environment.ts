@@ -20,7 +20,7 @@ export const environment = {
   viewOrderUrl : "/admin/viewOrders",
   updateOrderUrl : "/admin/updateOrder",
   placeOrderUrl : "/user/placeOrder",
-  logoutUrl : "/home/logout",
+  logoutUrl : "/home/logout"
 };
 
 /*

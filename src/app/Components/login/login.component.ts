@@ -10,7 +10,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: any;
+  public loginForm: any;
   error = false;
   constructor(private apiService: ApiService,
     private router: Router,

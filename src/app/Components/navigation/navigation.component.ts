@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  private loggedType: string;
+  public loggedType: string;
   constructor(private auth: ApiService, private route: Router) {
 
     if (this.auth.getAuthType() == null) {
