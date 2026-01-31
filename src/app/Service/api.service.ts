@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-  
+
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService, private http: HttpClient) {
 
   }
@@ -57,17 +57,17 @@ export class ApiService {
     return this.http.put<any>(environment.baseUrl+environment.updateCartUrl, map);
   }
 
-  // delete cart Item 
+  // delete cart Item
   deleteCartItem(bufdid: number): Observable<any> {
     return this.http.delete<any>(environment.baseUrl+environment.deleteCartUrl + "?bufcartid=" + bufdid);
   }
 
-  // update Address 
+  // update Address
   addOrUpdateAddress(adr: Address): Observable<any> {
     return this.http.post<any>(environment.baseUrl+environment.addAddressUrl, adr);
   }
 
-  // fetch address 
+  // fetch address
   getAddress(): Observable<any> {
     return this.http.get<any>(environment.baseUrl+environment.viewAddressUrl);
   }
@@ -89,7 +89,7 @@ export class ApiService {
     return this.http.post<any>(environment.baseUrl+environment.addProductUrl, formData);
 
   }
-  
+
   // update Product for Logged Admin User
   updateProduct( desc: string,
     quan: string, price: string, prodname: string, image: File, productid: any): Observable<any> {
@@ -113,7 +113,7 @@ export class ApiService {
     return this.http.get<any>(environment.baseUrl+environment.viewOrderUrl)
   }
 
-   // place the order 
+   // place the order
    placeOrder(): Observable<any> {
     return this.http.get<any>(environment.baseUrl+environment.placeOrderUrl);
   }
@@ -126,7 +126,7 @@ export class ApiService {
     return this.http.post<any>(environment.baseUrl+environment.updateOrderUrl, formData)
   }
 
-  // Authentication Methods 
+  // Authentication Methods
 
   isAuthenticated(): boolean {
     return this.getToken() !== null;
