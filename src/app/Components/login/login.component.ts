@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/Service/api.service';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   error = false;
   constructor(private apiService: ApiService,
     private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: UntypedFormBuilder) {
     this.createForm();
   }
 

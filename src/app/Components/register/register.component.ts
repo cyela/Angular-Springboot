@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/Service/api.service';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
@@ -11,7 +11,7 @@ export class RegisterComponent implements OnInit {
   public registerForm: any;
   constructor(private apiService: ApiService,
     private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: UntypedFormBuilder) {
     this.createForm();
   }
 
