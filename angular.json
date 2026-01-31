@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "shopping-app:build"
+            "buildTarget": "shopping-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "shopping-app:build:production"
+              "buildTarget": "shopping-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "shopping-app:build"
+            "buildTarget": "shopping-app:build"
           }
         },
         "test": {
